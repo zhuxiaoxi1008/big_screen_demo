@@ -1,0 +1,381 @@
+{
+  "timestamp": "2025-11-29 10:51:01",
+  "left_section": {
+    "service_categories": {
+      "total_service_users": 2961,
+      "categories": [
+        {
+          "name": "随身健康监测",
+          "count": 1747,
+          "description": "佩戴智能设备进行身体状况实时监测的人数"
+        },
+        {
+          "name": "居家安全预警",
+          "count": 477,
+          "description": "安装居家安全设备(门磁、燃气等)的人数"
+        },
+        {
+          "name": "健康理疗服务",
+          "count": 533,
+          "description": "接受专业康复理疗服务的人数"
+        },
+        {
+          "name": "居家健康服务",
+          "count": 838,
+          "description": "接受上门健康服务的人数"
+        },
+        {
+          "name": "直播培训服务",
+          "count": 116,
+          "description": "参与线上技能培训的人数"
+        }
+      ],
+      "description": "各类助残服务的覆盖人数统计"
+    },
+    "health_checks": {
+      "total_checks": 41067,
+      "monthly_checks": 7202,
+      "quarterly_checks": 16601,
+      "cumulative_checks": 71925,
+      "description": "健康检测相关数据统计"
+    },
+    "disability_types": [
+      {
+        "type": "多重",
+        "count": 375,
+        "percentage": 14.0,
+        "description": "同时具有多种残疾类型的残疾人"
+      },
+      {
+        "type": "精神",
+        "count": 594,
+        "percentage": 20.2,
+        "description": "精神类残疾的残疾人"
+      },
+      {
+        "type": "肢体",
+        "count": 942,
+        "percentage": 28.6,
+        "description": "肢体类残疾的残疾人"
+      },
+      {
+        "type": "智力",
+        "count": 228,
+        "percentage": 17.7,
+        "description": "智力类残疾的残疾人"
+      },
+      {
+        "type": "言语",
+        "count": 211,
+        "percentage": 7.7,
+        "description": "言语类残疾的残疾人"
+      },
+      {
+        "type": "听力",
+        "count": 233,
+        "percentage": 15.6,
+        "description": "听力类残疾的残疾人"
+      },
+      {
+        "type": "视力",
+        "count": 289,
+        "percentage": 21.1,
+        "description": "视力类残疾的残疾人"
+      }
+    ],
+    "description": "不同残疾类型的人员分布情况"
+  },
+  "middle_section": {
+    "total_services": {
+      "level_one": {
+        "count": 263,
+        "percentage": 8.6,
+        "description": "一级(重度)残疾人员服务数据"
+      },
+      "level_two": {
+        "count": 547,
+        "percentage": 18.0,
+        "description": "二级(中重度)残疾人员服务数据"
+      },
+      "level_three": {
+        "count": 940,
+        "percentage": 30.9,
+        "description": "三级(中度)残疾人员服务数据"
+      },
+      "level_four": {
+        "count": 1296,
+        "percentage": 42.5,
+        "description": "四级(轻度)残疾人员服务数据"
+      },
+      "description": "按残疾等级分类的服务统计数据"
+    },
+    "health_monitoring_data": [
+      {
+        "name": "张︴",
+        "age": 52,
+        "community": "社区19",
+        "health_index": "血压: 137/87",
+        "monitoring_result": "正常",
+        "alarm": "心率异常",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张﹋",
+        "age": 66,
+        "community": "社区7",
+        "health_index": "血压: 122/87",
+        "monitoring_result": "正常",
+        "alarm": "",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张︬",
+        "age": 41,
+        "community": "社区2",
+        "health_index": "血压: 150/91",
+        "monitoring_result": "正常",
+        "alarm": "",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张︢",
+        "age": 44,
+        "community": "社区3",
+        "health_index": "血压: 138/92",
+        "monitoring_result": "正常",
+        "alarm": "血压偏高",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张﹦",
+        "age": 64,
+        "community": "社区10",
+        "health_index": "血压: 138/86",
+        "monitoring_result": "正常",
+        "alarm": "心率异常",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张﹨",
+        "age": 71,
+        "community": "社区20",
+        "health_index": "血压: 120/80",
+        "monitoring_result": "正常",
+        "alarm": "心率异常",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张︜",
+        "age": 41,
+        "community": "社区18",
+        "health_index": "血压: 144/80",
+        "monitoring_result": "异常",
+        "alarm": "",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张︜",
+        "age": 77,
+        "community": "社区15",
+        "health_index": "血压: 142/80",
+        "monitoring_result": "异常",
+        "alarm": "心率异常",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张﹓",
+        "age": 70,
+        "community": "社区11",
+        "health_index": "血压: 132/93",
+        "monitoring_result": "正常",
+        "alarm": "心率异常",
+        "description": "实时健康监测数据记录"
+      },
+      {
+        "name": "张︝",
+        "age": 67,
+        "community": "社区5",
+        "health_index": "血压: 127/92",
+        "monitoring_result": "正常",
+        "alarm": "血压偏高",
+        "description": "实时健康监测数据记录"
+      }
+    ],
+    "rehabilitation_services": [
+      {
+        "work_order_id": "工单-4304",
+        "name": "李﹐",
+        "age": 45,
+        "community": "社区3",
+        "therapy_item": "康复训练",
+        "service_personnel": "护工50",
+        "service_station": "站点10",
+        "service_time": "2025-11-29 00:51",
+        "description": "康复理疗服务工单记录"
+      },
+      {
+        "work_order_id": "工单-2082",
+        "name": "李ﹳ",
+        "age": 75,
+        "community": "社区6",
+        "therapy_item": "针灸理疗",
+        "service_personnel": "护工37",
+        "service_station": "站点6",
+        "service_time": "2025-11-28 14:51",
+        "description": "康复理疗服务工单记录"
+      },
+      {
+        "work_order_id": "工单-3420",
+        "name": "李︺",
+        "age": 72,
+        "community": "社区9",
+        "therapy_item": "艾灸调理",
+        "service_personnel": "护工41",
+        "service_station": "站点8",
+        "service_time": "2025-11-29 07:51",
+        "description": "康复理疗服务工单记录"
+      },
+      {
+        "work_order_id": "工单-3256",
+        "name": "李﹙",
+        "age": 56,
+        "community": "社区9",
+        "therapy_item": "康复训练",
+        "service_personnel": "护工29",
+        "service_station": "站点5",
+        "service_time": "2025-11-28 20:51",
+        "description": "康复理疗服务工单记录"
+      },
+      {
+        "work_order_id": "工单-9398",
+        "name": "李﹓",
+        "age": 49,
+        "community": "社区16",
+        "therapy_item": "针灸理疗",
+        "service_personnel": "护工48",
+        "service_station": "站点4",
+        "service_time": "2025-11-29 01:51",
+        "description": "康复理疗服务工单记录"
+      },
+      {
+        "work_order_id": "工单-5769",
+        "name": "李︣",
+        "age": 75,
+        "community": "社区18",
+        "therapy_item": "推拿按摩",
+        "service_personnel": "护工33",
+        "service_station": "站点2",
+        "service_time": "2025-11-28 11:51",
+        "description": "康复理疗服务工单记录"
+      },
+      {
+        "work_order_id": "工单-1123",
+        "name": "李﹯",
+        "age": 71,
+        "community": "社区20",
+        "therapy_item": "针灸理疗",
+        "service_personnel": "护工41",
+        "service_station": "站点9",
+        "service_time": "2025-11-29 01:51",
+        "description": "康复理疗服务工单记录"
+      },
+      {
+        "work_order_id": "工单-2702",
+        "name": "李︐",
+        "age": 77,
+        "community": "社区15",
+        "therapy_item": "针灸理疗",
+        "service_personnel": "护工4",
+        "service_station": "站点10",
+        "service_time": "2025-11-28 11:51",
+        "description": "康复理疗服务工单记录"
+      }
+    ],
+    "description": "核心服务数据展示区域"
+  },
+  "right_section": {
+    "health_alerts": {
+      "total_alerts": 1931,
+      "alert_types": [
+        {
+          "type": "燃气报警",
+          "count": 70,
+          "description": "燃气泄漏预警次数"
+        },
+        {
+          "type": "水雾报警",
+          "count": 83,
+          "description": "漏水预警次数"
+        },
+        {
+          "type": "门禁报警",
+          "count": 127,
+          "description": "异常开门预警次数"
+        },
+        {
+          "type": "睡眠报警",
+          "count": 201,
+          "description": "睡眠异常预警次数"
+        },
+        {
+          "type": "跌倒报警",
+          "count": 60,
+          "description": "跌倒检测预警次数"
+        },
+        {
+          "type": "SOS报警",
+          "count": 33,
+          "description": "紧急求助预警次数"
+        }
+      ],
+      "description": "各类健康与安全预警统计"
+    },
+    "alert_handling": {
+      "pending": 72,
+      "resolved": 370,
+      "processed": 1037,
+      "description": "报警处理状态统计"
+    },
+    "devices": [
+      {
+        "name": "手表",
+        "total_count": 339,
+        "online_count": 196,
+        "description": "智能手表设备统计"
+      },
+      {
+        "name": "门磁",
+        "total_count": 427,
+        "online_count": 441,
+        "description": "门磁传感器设备统计"
+      },
+      {
+        "name": "燃气",
+        "total_count": 166,
+        "online_count": 154,
+        "description": "燃气传感器设备统计"
+      },
+      {
+        "name": "水雾",
+        "total_count": 108,
+        "online_count": 70,
+        "description": "水浸传感器设备统计"
+      },
+      {
+        "name": "烟雾",
+        "total_count": 252,
+        "online_count": 288,
+        "description": "烟雾传感器设备统计"
+      },
+      {
+        "name": "网关",
+        "total_count": 111,
+        "online_count": 186,
+        "description": "网络网关设备统计"
+      }
+    ],
+    "description": "各类智能设备的部署和在线状态统计"
+  },
+  "status": "success",
+  "description": "佰爱科技助残数据大屏模拟数据，用于前端展示测试"
+}

@@ -1,0 +1,63 @@
+html, body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#app {
+    height: 100%;
+    width: 100%;
+}
+
+.card-title {
+    @apply h-[40px] text-white flex items-center space-x-2 ml-6 pt-4;
+}
+
+.chart-container {
+    height: calc(100% - 40px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-label {
+    @apply text-sm;
+}
+
+.iconfont {
+    font-size: 20px !important;
+    color: #5cd9e8;
+}
+
+.dv-dec-size {
+    width: 50px !important;
+    height: 20px !important;
+}
+
+.flex-col-full {
+    @apply flex-1 flex flex-col;
+}
+
+.flex-long-col-full {
+    flex: 1.4;
+    @apply flex flex-col;
+}
+
+.digital-number {
+    font-family: 'Digital-7', monospace;
+    font-size: 60px;
+    color: lightblue;
+    text-align: center;
+}
+
+.digital-label {
+    font-size: 20px;
+    color: lightblue;
+    text-align: center;
+}
+
+.flex-center {
+    @apply flex justify-center items-center;
+}

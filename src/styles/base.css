@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Digital-7';
+  src: local('Digital-7'), 
+       url('@/assets/fonts/digital-7.mono.ttf') format('truetype');
+  font-display: swap;
+}

@@ -1,68 +1,42 @@
-# Vue3-Big-Screen
-![输入图片说明](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/vue3-big-screen/logo.jpg)
+# vue_bigscreen
 
-### 项目介绍
+This template should help get you started developing with Vue 3 in Vite.
 
-- 这里一个基于 Vue3、Vite、TypeScript、DataV、ECharts 框架的 " **数据大屏项目** "。
-- 使用 template实现组件封装，各类型图标支持动态渲染，可根据自身需求进行替换。
-- 使用Vite进行项目构建提高了开发和打包效率。
-- 项目按照 1920*1080 作为设计稿，支持任何尺寸的同比例缩放。
-- 项目参考[原项目](https://gitee.com/MTrun/vue-big-screen-plugin)的界面和设计思路，优化了相关细节，解决了原先项目中的各种错误。
-- 项目已经适配移动端H5，有兴趣的朋友可以点击这里[传送门](https://gitee.com/xiaoxiang_reincarnation/vue3-big-screen-mobile.git)。
-- 项目中注释了图片压缩vite插件，如需对图片进行压缩可自行安装vite-plugin-imagemin插件 
-  ```npm i vite-plugin-imagemin -D 或者 cnpm i vite-plugin-imagemin -D```
-### 项目截图
-![输入图片说明](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/vue3-big-screen/big-screen_2m.gif)
+## Recommended IDE Setup
 
-### 项目预览
-- 在线预览地址：https://screen.xkxk.tech
+[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-### 源码下载
-- gitee下载地址：[项目链接](https://gitee.com/xiaoxiang_reincarnation/vue3-big-screen.git)
-- github下载地址：[项目链接](https://github.com/dddggg123/vue3-big-screen.git)
-### 相关技术栈
+## Recommended Browser Setup
 
-- Vue3、TypeScript、Vite、DataV、ECharts
+- Chromium-based browsers (Chrome, Edge, Brave, etc.):
+  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
+  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
+- Firefox:
+  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
 
-友情链接：
+## Type Support for `.vue` Imports in TS
 
-1.  [Vue3 官方文档](https://composition-api.vuejs.org/zh/api.html#setup)
-2.  [DataV 官方文档](http://datav.jiaminghi.com/guide/)
-3.  [echarts 示例](https://echarts.apache.org/examples/zh/index.html)
-4.  [echarts API 文档](https://echarts.apache.org/zh/api.html#echarts)
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
-### 使用说明
-```
-# 克隆项目
-git clone https://gitee.com/xiaoxiang_reincarnation/vue3-big-screen.git
+## Customize configuration
 
-# 进入项目
-cd vue3-big-screen
+See [Vite Configuration Reference](https://vite.dev/config/).
 
-# 安装依赖
+## Project Setup
+
+```sh
 npm install
+```
 
-# 运行项目
+### Compile and Hot-Reload for Development
+
+```sh
 npm run dev
+```
 
-# 打包发布
+### Type-Check, Compile and Minify for Production
+
+```sh
 npm run build
 ```
-
-### 联系作者
-
-- 使用中遇到不懂的问题或者有更好的建议欢迎添加作者微信
-- 想要加入技术群学习前端开发也可以联系作者
-
-  ![作者](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/author/author_wechat.jpg?imageView2/1/w/300/h/300)
-
-### 写在最后
-
-- 如果你觉得本项目不错或者对自己工作有帮助，欢迎点个star或者打赏作者一杯咖啡！
-
-   ![作者](https://xkxk-1253929253.cos.ap-shanghai.myqcloud.com/author/author_admire.jpg?imageView2/1/w/300/h/300)
-
-
-
-
-

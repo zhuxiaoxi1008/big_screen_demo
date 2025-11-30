@@ -1,0 +1,506 @@
+<template>
+    <div class="h-[0px] flex-1 flex flex-row">
+        <div class="flex-col-full">
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-tongji"></i>
+                    <span class="card-label">服务总人数统计</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container">
+                    <VChart ref="chart1" class="flex-1" :option="option1" theme="myTheme" />
+                </div>
+            </dv-border-box-12>
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-align-left"></i>
+                    <span class="card-label">健康检测异常统计</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container">
+                    <dv-capsule-chart class="flex-1 mx-8" :config="option2"></dv-capsule-chart>
+                </div>
+            </dv-border-box-12>
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-tongji2"></i>
+                    <span class="card-label">残疾人类别统计</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container">
+                    <VChart ref="chart2" class="flex-1" :option="option3" theme="myTheme" />
+                </div>
+            </dv-border-box-12>
+        </div>
+        <div class="flex-long-col-full">
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-zhibiao2"></i>
+                    <span class="card-label">残疾等级分类统计</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container">
+                    <div class="flex-1 grid grid-cols-2 grid-rows-2">
+                        <div class="flex-center">
+                            <div class="flex flex-col">
+                                <span class="digital-number">{{ option4.level_one.count }}</span>
+                                <span class="digital-label">一级(重度 - {{ option4.level_one.percentage }}%) </span>
+                            </div>
+                        </div>
+                        <div class="flex-center">
+                            <div class="flex flex-col">
+                                <span class="digital-number">{{ option4.level_two.count }}</span>
+                                <span class="digital-label">二级(中重度 - {{ option4.level_two.percentage }}%) </span>
+                            </div>
+                        </div>
+                        <div class="flex-center">
+                            <div class="flex flex-col">
+                                <span class="digital-number">{{ option4.level_three.count }}</span>
+                                <span class="digital-label">三级(中度 - {{ option4.level_three.percentage }}%) </span>
+                            </div>
+                        </div>
+                        <div class="flex-center">
+                            <div class="flex flex-col">
+                                <span class="digital-number">{{ option4.level_four.count }}</span>
+                                <span class="digital-label">四级(轻度 - {{ option4.level_four.percentage }}%) </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </dv-border-box-12>
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-fenxi7"></i>
+                    <span class="card-label">健康检测实时数据</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container px-4 pb-4">
+                    <dv-scroll-board :config="option5" class="h-full w-full" />
+                </div>
+            </dv-border-box-12>
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-fenxi7"></i>
+                    <span class="card-label">康复理疗服务数据</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container px-4 pb-4">
+                    <dv-scroll-board :config="option6" class="h-full w-full" />
+                </div>
+            </dv-border-box-12>
+        </div>
+        <div class="flex-col-full">
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-supervise"></i>
+                    <span class="card-label">健康预警统计</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container">
+                    <VChart ref="chart7" class="flex-1" :option="option7" theme="myTheme" />
+                </div>
+            </dv-border-box-12>
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-tongji2"></i>
+                    <span class="card-label">报警处理情况</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container">
+                    <VChart ref="chart8" class="flex-1" :option="option8" theme="myTheme" />
+                </div>
+            </dv-border-box-12>
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-chart-line"></i>
+                    <span class="card-label">智能设备信息</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container">
+                    <VChart ref="chart9" class="flex-1" :option="option9" theme="myTheme" />
+                </div>
+            </dv-border-box-12>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { getDashboardData } from '@/apis/dashboardApi';
+
+import { ref } from 'vue';
+
+const option1 = ref({
+    tooltip: {
+        trigger: 'item'
+    },
+    legend: {
+        show: false,
+    },
+    series: [
+        {
+            type: 'pie',
+            radius: ['55%', '70%'],
+            label: {
+                formatter: function (params) {
+                    return `${params.name}\n${params.value} 人 - (${params.percent}%)`
+                }
+            },
+            data: []
+        }
+    ]
+})
+const option2 = ref({
+    data: [],
+    unit: '次',
+    showValue: true
+})
+const option3 = ref({
+    xAxis: {
+        type: 'category',
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            data: [],
+            barWidth: '30%',
+            type: 'bar',
+            label: {
+                show: true,
+                position: 'top',
+                color: '#ffffff',
+                fontSize: 12,
+                formatter: function (params) {
+                    return `${params.value} 人\n(${params.data.percentage}%)`
+                }
+            }
+        }
+    ]
+})
+const chart1 = ref(null)
+const chart2 = ref(null)
+const chart3 = ref(null)
+
+const option4 = ref({
+    level_one: {
+        count: 0,
+        percentage: 0
+    },
+    level_two: {
+        count: 0,
+        percentage: 0
+    },
+    level_three: {
+        count: 0,
+        percentage: 0
+    },
+    level_four: {
+        count: 0,
+        percentage: 0
+    },
+})
+
+const option5 = ref({
+    header: [
+        "姓名",
+        "年龄",
+        "社区",
+        "健康指标",
+        "监测结果",
+        "报警提示"
+    ],
+    columnWidth: [],
+    data: [],
+})
+
+const option6 = ref({
+    header: [
+        "工单编号",
+        "姓名",
+        "年龄",
+        "社区",
+        "理疗项目",
+        "服务人员",
+        "服务站点",
+        "服务开始时间"
+    ],
+    columnWidth: [100, 80, 50, 75, 80, 80, 100],
+    data: [],
+})
+
+const chart7 = ref(null)
+const chart8 = ref(null)
+const chart9 = ref(null)
+
+const option7 = ref({
+    tooltip: {
+        trigger: 'item'
+    },
+    legend: {
+        show: false,
+    },
+    series: [
+        {
+            type: 'pie',
+            radius: '70%',
+            label: {
+                formatter: function (params) {
+                    return `${params.name}\n${params.value} 次 - (${params.percent}%)`
+                }
+            },
+            data: [],
+
+        }
+    ]
+})
+const option8 = ref({
+    xAxis: {
+        type: 'category',
+        data: ["未处理", "报警解除", "已处理"]
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            data: [{
+                value: 0,
+                name: "未处理",
+                itemStyle: {
+                    color: '#ed3f14'
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    color: '#ed3f14',
+                }
+            }, {
+                value: 0,
+                name: "报警解除",
+                itemStyle: {
+                    color: '#19be6b'
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    color: '#19be6b',
+                }
+            }, {
+                value: 0,
+                name: "已处理",
+                itemStyle: {
+                    color: '#2d8cf0'
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    color: '#2d8cf0',
+                }
+            }],
+            type: 'bar',
+            barWidth: '30%',
+        }
+    ]
+})
+const option9 = ref({
+    grid: {
+        top: '15%'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        top: '0%'
+    },
+    xAxis: {
+        type: 'category',
+        data: []
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: '总数',
+            data: [],
+            type: 'line'
+        },
+        {
+            name: '在线',
+            data: [],
+            type: 'bar',
+            barWidth: "20%"
+        }
+    ]
+})
+
+
+getDashboardData().then(res => {
+    setLeftOption(res.left_section)
+    setMiddleOption(res.middle_section)
+    setRightOption(res.right_section)
+})
+
+function setLeftOption(datas) {
+    let service_categories = datas.service_categories
+    let disability_types = datas.disability_types
+    let health_checks = datas.health_checks
+    setOption1(service_categories)
+    setOption2(health_checks)
+    setOption3(disability_types)
+}
+
+function setOption1(datas) {
+    let total = datas.total_service_users
+    let data = datas.categories.map(_ => {
+        return {
+            name: _.name,
+            value: _.count
+        }
+    })
+    option1.value.series[0].data = data
+    option1.value.title = {
+        text: `${total}`,
+        subtext: '总人数',
+        subtextStyle: {
+            color: '#ffffff', // 改为白色，在深色背景下更清晰
+            fontSize: 16,
+            fontWeight: 'normal'
+        },
+        textStyle: {
+            color: '#ffffff', // 改为白色
+            fontSize: 20,     // 稍微增大主标题字体
+            fontWeight: 'bold' // 主标题加粗
+        },
+        left: '49%',
+        top: '42%',       // 微调垂直位置，使居中效果更好
+        textAlign: 'center'
+    }
+    chart1.value && chart1.value.setOption(option1.valule)
+}
+
+function setOption2(datas) {
+    let { total_checks, quarterly_checks, monthly_checks, cumulative_checks } = datas
+    option2.value.data = [
+        { value: total_checks, name: '总检查' },
+        { value: quarterly_checks, name: '季度检查' },
+        { value: monthly_checks, name: '月度检查' },
+        { value: cumulative_checks, name: '累计检查' },
+    ]
+}
+
+function setOption3(datas) {
+    let xAxisData = []
+    let seriesData = []
+    xAxisData = datas.map(_ => _.type)
+    seriesData = datas.map(_ => {
+        return {
+            value: _.count,
+            percentage: _.percentage,
+        }
+
+    })
+    option3.value.xAxis.data = xAxisData
+    option3.value.series[0].data = seriesData
+}
+
+function setMiddleOption(datas) {
+    // option2.value = option
+    let total_services = datas.total_services
+    let health_monitoring_data = datas.health_monitoring_data
+    let rehabilitation_services = datas.rehabilitation_services
+    setOption4(total_services)
+    setOption5(health_monitoring_data)
+    setOption6(rehabilitation_services)
+}
+
+function setOption4(datas) {
+    // option2.value = option
+    option4.value.level_one = datas.level_one
+    option4.value.level_two = datas.level_two
+    option4.value.level_three = datas.level_three
+    option4.value.level_four = datas.level_four
+}
+
+function setOption5(datas) {
+    let data = datas.map(_ => {
+        return [
+            _.name,
+            _.age,
+            _.community,
+            _.health_index,
+            _.monitoring_result,
+            _.alert_info
+        ]
+    })
+    option5.value.data = data
+}
+
+function setOption6(datas) {
+    let data = datas.map(_ => {
+        return [
+            _.work_order_id,
+            _.name,
+            _.age,
+            _.community,
+            _.therapy_item,
+            _.service_personnel,
+            _.service_station,
+            _.service_time
+
+        ]
+    })
+    option6.value.data = data
+}
+
+function setRightOption(datas) {
+    // console.log(datas)
+    setOption7(datas.health_alerts)
+    setOption8(datas.alert_handling)
+    setOption9(datas.devices)
+}
+
+function setOption7(datas) {
+    let data = datas.alert_types.map(_ => {
+        return {
+            name: _.type,
+            value: _.count
+        }
+    })
+    option7.value.series[0].data = data
+    chart7.value && chart7.value.setOption(option7.valule)
+}
+
+function setOption8(datas) {
+    let pending = datas.pending
+    let processed = datas.processed
+    let resolved = datas.resolved
+    option8.value.series[0].data[0].value = pending
+    option8.value.series[0].data[1].value = processed
+    option8.value.series[0].data[2].value = resolved
+
+    chart8.value && chart8.value.setOption(option8.valule)
+}
+
+function setOption9(datas) {
+    console.log(datas)
+    let xAxisData = datas.map(_ => _.name) || []
+    let seriesData1 = datas.map(_ => _.total_count) || []
+    let seriesData2 = datas.map(_ => _.online_count) || []
+
+    option9.value.xAxis.data = xAxisData
+    option9.value.series[0].data = seriesData1
+    option9.value.series[1].data = seriesData2
+    chart9.value && chart9.value.setOption(option9.valule)
+}
+
+
+
+</script>
+
+<style lang="scss" scoped></style>

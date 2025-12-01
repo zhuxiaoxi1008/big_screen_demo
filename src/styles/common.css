@@ -52,6 +52,13 @@ html, body {
     text-align: center;
 }
 
+.digital-number-sm {
+    font-family: 'Digital-7', monospace;
+    font-size: 40px;
+    color: lightblue;
+    text-align: center;
+}
+
 .digital-label {
     font-size: 20px;
     color: lightblue;

@@ -17,8 +17,26 @@
                     <span class="card-label">健康检测异常统计</span>
                     <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
                 </div>
-                <div class="chart-container">
-                    <dv-capsule-chart class="flex-1 mx-8" :config="option2"></dv-capsule-chart>
+                <div class="chart-container p-8">
+                    <!-- <dv-capsule-chart class="flex-1 mx-8" :config="option2"></dv-capsule-chart> -->
+                    <div class="flex-1 flex justify-between items-center px-16">
+                        <span class="digital-label">健康检测次数</span>
+                        <span class="digital-number">{{ option2.total_checks }}</span>
+                    </div>
+                    <div class="flex-1 flex justify-between items-center">
+                        <div class="flex-1 flex flex-col justify-center">
+                            <span class="digital-number-sm">{{ option2.monthly_checks }}</span>
+                            <span class="digital-label">本月检测</span>
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <span class="digital-number-sm">{{ option2.quarterly_checks }}</span>
+                            <span class="digital-label">季度检测</span>
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <span class="digital-number-sm">{{ option2.cumulative_checks }}</span>
+                            <span class="digital-label">累计检测</span>
+                        </div>
+                    </div>
                 </div>
             </dv-border-box-12>
             <dv-border-box-12 class="flex-col-full">
@@ -40,7 +58,8 @@
                     <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
                 </div>
                 <div class="chart-container">
-                    <div class="flex-1 grid grid-cols-2 grid-rows-2">
+                    <VChart ref="chart4" class="flex-1" :option="option4" theme="myTheme" />
+                    <!-- <div class="flex-1 grid grid-cols-2 grid-rows-2">
                         <div class="flex-center">
                             <div class="flex flex-col">
                                 <span class="digital-number">{{ option4.level_one.count }}</span>
@@ -65,7 +84,7 @@
                                 <span class="digital-label">四级(轻度 - {{ option4.level_four.percentage }}%) </span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </dv-border-box-12>
             <dv-border-box-12 class="flex-col-full">
@@ -133,6 +152,54 @@ const option1 = ref({
     tooltip: {
         trigger: 'item'
     },
+    grid: {
+        bottom: '20%',
+    },
+    legend: {
+        show: false,
+    },
+    xAxis: {
+        type: 'category',
+        data: [],
+        axisLabel: {
+            rotate: 15,
+            margin: 15
+        }
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            type: 'bar',
+            barWidth: '30%',
+            label: {
+                show: true,
+                position: 'top',
+                color: '#ffffff',
+                fontSize: 12,
+                formatter: function (params) {
+                    return `${params.value} 人`
+                }
+            },
+            data: []
+        }
+    ]
+})
+const option2 = ref({
+    // data: [],
+    // unit: '次',
+    // showValue: true
+    cumulative_checks: 71925,
+    description: "健康检测相关数据统计",
+    monthly_checks: 7202,
+    quarterly_checks: 16601,
+    total_checks: 41067,
+})
+const option3 = ref({
+    tooltip: {
+        trigger: 'item'
+    },
     legend: {
         show: false,
     },
@@ -149,57 +216,48 @@ const option1 = ref({
         }
     ]
 })
-const option2 = ref({
-    data: [],
-    unit: '次',
-    showValue: true
-})
-const option3 = ref({
-    xAxis: {
-        type: 'category',
-        data: []
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            data: [],
-            barWidth: '30%',
-            type: 'bar',
-            label: {
-                show: true,
-                position: 'top',
-                color: '#ffffff',
-                fontSize: 12,
-                formatter: function (params) {
-                    return `${params.value} 人\n(${params.data.percentage}%)`
-                }
-            }
-        }
-    ]
-})
 const chart1 = ref(null)
 const chart2 = ref(null)
 const chart3 = ref(null)
 
+
+const chart4 = ref(null)
 const option4 = ref({
-    level_one: {
-        count: 0,
-        percentage: 0
+    // level_one: {
+    //     count: 0,
+    //     percentage: 0
+    // },
+    // level_two: {
+    //     count: 0,
+    //     percentage: 0
+    // },
+    // level_three: {
+    //     count: 0,
+    //     percentage: 0
+    // },
+    // level_four: {
+    //     count: 0,
+    //     percentage: 0
+    // },
+
+    tooltip: {
+        trigger: 'item'
     },
-    level_two: {
-        count: 0,
-        percentage: 0
+    legend: {
+        show: false,
     },
-    level_three: {
-        count: 0,
-        percentage: 0
-    },
-    level_four: {
-        count: 0,
-        percentage: 0
-    },
+    series: [
+        {
+            type: 'pie',
+            radius: ['55%', '70%'],
+            label: {
+                formatter: function (params) {
+                    return `${params.name}\n${params.value} 人 - (${params.percent}%)`
+                }
+            },
+            data: []
+        }
+    ]
 })
 
 const option5 = ref({
@@ -256,6 +314,10 @@ const option7 = ref({
     ]
 })
 const option8 = ref({
+    grid: {
+        top: '15%',
+        bottom: '15%'
+    },
     xAxis: {
         type: 'category',
         data: ["未处理", "报警解除", "已处理"]
@@ -356,15 +418,69 @@ function setLeftOption(datas) {
 }
 
 function setOption1(datas) {
-    let total = datas.total_service_users
+    let xAxisData = datas.categories.map(_ => _.name)
+    // let total = datas.total_service_users
     let data = datas.categories.map(_ => {
         return {
             name: _.name,
             value: _.count
         }
     })
+    option1.value.xAxis.data = xAxisData
     option1.value.series[0].data = data
-    option1.value.title = {
+    // option1.value.title = {
+    //     text: `${total}`,
+    //     subtext: '总人数',
+    //     subtextStyle: {
+    //         color: '#ffffff', // 改为白色，在深色背景下更清晰
+    //         fontSize: 16,
+    //         fontWeight: 'normal'
+    //     },
+    //     textStyle: {
+    //         color: '#ffffff', // 改为白色
+    //         fontSize: 20,     // 稍微增大主标题字体
+    //         fontWeight: 'bold' // 主标题加粗
+    //     },
+    //     left: '49%',
+    //     top: '42%',       // 微调垂直位置，使居中效果更好
+    //     textAlign: 'center'
+    // }
+    chart1.value && chart1.value.setOption(option1.valule)
+}
+
+function setOption2(datas) {
+    // let { total_checks, quarterly_checks, monthly_checks, cumulative_checks } = datas
+    // option2.value.data = [
+    //     { value: total_checks, name: '总检查' },
+    //     { value: quarterly_checks, name: '季度检查' },
+    //     { value: monthly_checks, name: '月度检查' },
+    //     { value: cumulative_checks, name: '累计检查' },
+    // ]
+    option2.value = datas
+}
+
+function setOption3(datas) {
+    // let xAxisData = []
+    // let seriesData = []
+    // xAxisData = datas.map(_ => _.type)
+    // seriesData = datas.map(_ => {
+    //     return {
+    //         value: _.count,
+    //         percentage: _.percentage,
+    //     }
+
+    // })
+    // option3.value.xAxis.data = xAxisData
+    // option3.value.series[0].data = seriesData
+    let total = datas.reduce((sum, item) => sum + item.count, 0)
+    let data = datas.map(_ => {
+        return {
+            name: _.type,
+            value: _.count,
+            percentage: _.percentage,
+        }
+    })
+    option3.value.title = {
         text: `${total}`,
         subtext: '总人数',
         subtextStyle: {
@@ -381,32 +497,8 @@ function setOption1(datas) {
         top: '42%',       // 微调垂直位置，使居中效果更好
         textAlign: 'center'
     }
-    chart1.value && chart1.value.setOption(option1.valule)
-}
-
-function setOption2(datas) {
-    let { total_checks, quarterly_checks, monthly_checks, cumulative_checks } = datas
-    option2.value.data = [
-        { value: total_checks, name: '总检查' },
-        { value: quarterly_checks, name: '季度检查' },
-        { value: monthly_checks, name: '月度检查' },
-        { value: cumulative_checks, name: '累计检查' },
-    ]
-}
-
-function setOption3(datas) {
-    let xAxisData = []
-    let seriesData = []
-    xAxisData = datas.map(_ => _.type)
-    seriesData = datas.map(_ => {
-        return {
-            value: _.count,
-            percentage: _.percentage,
-        }
-
-    })
-    option3.value.xAxis.data = xAxisData
-    option3.value.series[0].data = seriesData
+    option3.value.series[0].data = data
+    chart3.value && chart3.value.setOption(option3.value)
 }
 
 function setMiddleOption(datas) {
@@ -419,12 +511,43 @@ function setMiddleOption(datas) {
     setOption6(rehabilitation_services)
 }
 
-function setOption4(datas) {
+function setOption4(objs) {
     // option2.value = option
-    option4.value.level_one = datas.level_one
-    option4.value.level_two = datas.level_two
-    option4.value.level_three = datas.level_three
-    option4.value.level_four = datas.level_four
+    // option4.value.level_one = objs.level_one
+    // option4.value.level_two = objs.level_two
+    // option4.value.level_three = objs.level_three
+    // option4.value.level_four = objs.level_four
+    let datas = [objs.level_one, objs.level_two, objs.level_three, objs.level_four]
+    console.log('option4', datas)
+    let total = datas.reduce((sum, item) => sum + item.count, 0)
+    let data = datas.map(_ => {
+        return {
+            name: _.description,
+            value: _.count,
+            percentage: _.percentage,
+        }
+    })
+    option4.value.title = {
+        text: `${total}`,
+        subtext: '总数',
+        subtextStyle: {
+            color: '#ffffff', // 改为白色，在深色背景下更清晰
+            fontSize: 16,
+            fontWeight: 'normal'
+        },
+        textStyle: {
+            color: '#ffffff', // 改为白色
+            fontSize: 20,     // 稍微增大主标题字体
+            fontWeight: 'bold' // 主标题加粗
+        },
+        left: '49%',
+        top: '42%',       // 微调垂直位置，使居中效果更好
+        textAlign: 'center'
+    }
+    option4.value.series[0].data = data
+    chart4.value && chart4.value.setOption(option4.value)
+
+
 }
 
 function setOption5(datas) {
@@ -459,7 +582,6 @@ function setOption6(datas) {
 }
 
 function setRightOption(datas) {
-    // console.log(datas)
     setOption7(datas.health_alerts)
     setOption8(datas.alert_handling)
     setOption9(datas.devices)
@@ -488,7 +610,6 @@ function setOption8(datas) {
 }
 
 function setOption9(datas) {
-    console.log(datas)
     let xAxisData = datas.map(_ => _.name) || []
     let seriesData1 = datas.map(_ => _.total_count) || []
     let seriesData2 = datas.map(_ => _.online_count) || []

@@ -1,5 +1,5 @@
 const theme = {
-    color: ['#2d8cf0', '#19be6b', '#ff9900', '#E46CBB', '#9A66E4', '#ed3f14'],
+    color: ['#2d8cf0', '#19be6b', '#ff9900', '#E46CBB', '#9A66E4', '#f45b5b', '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80', '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa', '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050', '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'],
     backgroundColor: 'rgba(0,0,0,0)',
     textStyle: {},
     grid: {
@@ -17,12 +17,12 @@ const theme = {
     line: {
         itemStyle: {
             normal: {
-                borderWidth: '2'
+                borderWidth: '1'
             }
         },
         lineStyle: {
             normal: {
-                width: '2'
+                width: '1'
             }
         },
         symbolSize: '6',
@@ -235,25 +235,27 @@ const theme = {
         axisLine: {
             show: true,
             lineStyle: {
-                color: '#cccccc'
+                color: '#f5f7fa'
             }
         },
         axisTick: {
             show: false,
             lineStyle: {
-                color: '#333'
+                color: '#f5f7fa'
             }
         },
         axisLabel: {
             show: true,
             textStyle: {
-                color: '#fff'
+                color: '#f5f7fa',
+                fontSize: 14,
+                
             }
         },
         splitLine: {
             show: false,
             lineStyle: {
-                color: ['#eeeeee']
+                color: ['#f5f7fa']
             }
         },
         splitArea: {
@@ -267,25 +269,25 @@ const theme = {
         axisLine: {
             show: true,
             lineStyle: {
-                color: '#cccccc'
+                color: '#f5f7fa'
             }
         },
         axisTick: {
             show: false,
             lineStyle: {
-                color: '#333'
+                color: '#f5f7fa'
             }
         },
         axisLabel: {
             show: true,
             textStyle: {
-                color: '#fff'
+                color: '#f5f7fa'
             }
         },
         splitLine: {
             show: false,
             lineStyle: {
-                color: ['#eeeeee']
+                color: ['#f5f7fa']
             }
         },
         splitArea: {

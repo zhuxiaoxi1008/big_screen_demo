@@ -51,7 +51,7 @@
             </dv-border-box-12>
         </div>
         <div class="flex-long-col-full">
-            <dv-border-box-12 class="flex-col-full">
+            <!-- <dv-border-box-12 class="flex-col-full">
                 <div class="card-title">
                     <i class="iconfont icon-zhibiao2"></i>
                     <span class="card-label">残疾等级分类统计</span>
@@ -59,35 +59,12 @@
                 </div>
                 <div class="chart-container">
                     <VChart ref="chart4" class="flex-1" :option="option4" theme="myTheme" />
-                    <!-- <div class="flex-1 grid grid-cols-2 grid-rows-2">
-                        <div class="flex-center">
-                            <div class="flex flex-col">
-                                <span class="digital-number">{{ option4.level_one.count }}</span>
-                                <span class="digital-label">一级(重度 - {{ option4.level_one.percentage }}%) </span>
-                            </div>
-                        </div>
-                        <div class="flex-center">
-                            <div class="flex flex-col">
-                                <span class="digital-number">{{ option4.level_two.count }}</span>
-                                <span class="digital-label">二级(中重度 - {{ option4.level_two.percentage }}%) </span>
-                            </div>
-                        </div>
-                        <div class="flex-center">
-                            <div class="flex flex-col">
-                                <span class="digital-number">{{ option4.level_three.count }}</span>
-                                <span class="digital-label">三级(中度 - {{ option4.level_three.percentage }}%) </span>
-                            </div>
-                        </div>
-                        <div class="flex-center">
-                            <div class="flex flex-col">
-                                <span class="digital-number">{{ option4.level_four.count }}</span>
-                                <span class="digital-label">四级(轻度 - {{ option4.level_four.percentage }}%) </span>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
+            </dv-border-box-12> -->
+            <dv-border-box-12 class="flex-col-full px-4 py-4">
+                <VChart ref="chartMap" class="flex-1" :option="mapOption" theme="myTheme" />
             </dv-border-box-12>
-            <dv-border-box-12 class="flex-col-full">
+            <dv-border-box-12 class="flex flex-col" style="height: 200px;">
                 <div class="card-title">
                     <i class="iconfont icon-fenxi7"></i>
                     <span class="card-label">健康检测实时数据</span>
@@ -97,7 +74,7 @@
                     <dv-scroll-board :config="option5" class="h-full w-full" />
                 </div>
             </dv-border-box-12>
-            <dv-border-box-12 class="flex-col-full">
+            <dv-border-box-12 class="flex flex-col" style="height: 200px;">
                 <div class="card-title">
                     <i class="iconfont icon-fenxi7"></i>
                     <span class="card-label">康复理疗服务数据</span>
@@ -109,6 +86,16 @@
             </dv-border-box-12>
         </div>
         <div class="flex-col-full">
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-zhibiao2"></i>
+                    <span class="card-label">残疾等级分类统计</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container">
+                    <VChart ref="chart4" class="flex-1" :option="option4" theme="myTheme" />
+                </div>
+            </dv-border-box-12> 
             <dv-border-box-12 class="flex-col-full">
                 <div class="card-title">
                     <i class="iconfont icon-supervise"></i>
@@ -260,6 +247,207 @@ const option4 = ref({
     ]
 })
 
+var geoCoordMap = {
+    '西安': [108.948024, 34.263161],
+    '铜川': [108.979608, 35.016582],
+    '宝鸡': [107.14487, 34.369315],
+    '咸阳': [108.685117, 34.533439],
+    '渭南': [109.802882, 34.499381],
+    '延安': [109.49081, 36.596537],
+    '汉中': [107.028621, 33.077668],
+    '榆林': [109.741193, 38.290162],
+    '安康': [109.029273, 32.6903],
+    '商洛': [109.939776, 33.868319]
+}
+
+//  给value一个随机值
+var mapData = []
+for (var key in geoCoordMap) {
+    mapData.push({
+        'name': key,
+        'value': parseInt((Math.random() + 1) * 150)
+    })
+}
+
+// 输出json对象数组,value里包含坐标值和随机值
+function convertData (data) {
+    var res = []
+    for (var i = 0; i < data.length; i++) {
+        var geoCoord = geoCoordMap[data[i].name]
+        res.push({
+            name: data[i].name,
+            value: geoCoord.concat(data[i].value)
+        })
+    }
+    return res
+}
+
+//  设置目标点, 配置线条指向
+// function convertToLineData (data) {
+//     var res = []
+//     for (var i = 0; i < data.length; i++) {
+//         // 起点
+//         var fromCoord = geoCoordMap[data[i].name]
+//         //  终点,这里设置的西安
+//         var toCoord = [108.948024, 34.263161]
+//         res.push([
+//             {
+//                 coord: fromCoord,
+//                 value: data[i].value
+//             },
+//             {
+//                 coord: toCoord
+//             }
+//         ])
+//     }
+//     return res
+// }
+// 设置目标点, 配置线条指向
+function convertToLineData (data) {
+    var res = []
+    for (var i = 0; i < data.length; i++) {
+        // 起点,这里设置的西安
+        var fromCoord = [108.948024, 34.263161]
+        // 终点
+        var toCoord = geoCoordMap[data[i].name]
+        res.push([
+            {
+                coord: fromCoord,
+                value: data[i].value
+            },
+            {
+                coord: toCoord
+            }
+        ])
+    }
+    return res
+}
+
+
+const mapOption = ref({
+    timeline: {
+        show: false
+    },
+    baseOption: {
+        // 设置地图参数和样式
+        geo: {
+            show: true,
+            map: 'shanxi',
+            roam: true,
+            zoom: 1,
+            // 地图中心点, 可调节显示的偏移量
+            center: [108.348024, 35.463161],
+            label: {
+                normal: {
+                    show: false, // 显示标签
+                    // color: '#ffffff', // 设置字体为白色
+                    // fontSize: 12
+                },
+                emphasis: {
+                    show: false, // 高亮时也显示标签
+                    // color: '#ffffff' // 高亮时字体为白色
+                }
+            },
+            itemStyle: {
+                normal: {
+                    borderColor: '#2d8cf0',
+                    borderWidth: 1,
+                    areaColor: {
+                        type: 'radial',
+                        x: 0.5,
+                        y: 0.5,
+                        r: 0.8,
+                        colorStops: [{
+                            offset: 0,
+                            // 0% 处的颜色
+                            color: 'rgba(45, 140, 240, 0.1)'
+                        },
+                        {
+                            offset: 1,
+                            // 100% 处的颜色
+                             color: 'rgba(45, 140, 240, 0.3)'
+                        }]
+                    },
+                    shadowColor: 'rgba(45, 140, 240, 0.3)',
+                    shadowOffsetX: -2,
+                    shadowOffsetY: 2,
+                    shadowBlur: 10
+                },
+                emphasis: {
+                    // 鼠标悬浮高亮
+                    areaColor: '#5ab1ef',
+                    borderWidth: 0
+                }
+            }
+        }
+    },
+    options: [{
+        backgroundColor: 'transparent',
+        xAxis: {
+            show: false
+        },
+        yAxis: {
+            show: false
+        },
+        series: [{
+            // 坐标点参数和样式
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: convertData(mapData),
+            symbolSize: function (val) {
+                return val[2] / 10
+            },
+            showEffectOn: 'render',
+            rippleEffect: {
+                brushType: 'stroke'
+            },
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: true,
+                    color: '#ffffff' // 白色标签文字
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#2d8cf0',
+                    shadowBlur: 8,
+                    shadowColor: '#5ab1ef'
+                }
+            }
+        },
+        {
+            // 线条参数和样式
+            type: 'lines',
+            // 变化频率
+            zlevel: 2,
+            effect: {
+                show: true,
+                // 箭头指向速度，值越小速度越快
+                period: 4,
+                // 特效尾迹长度,取值0到1,值越大,尾迹越长
+                trailLength: 0.05,
+                symbol: 'arrow',
+                // 图标大小
+                symbolSize: 5
+            },
+            lineStyle: {
+                normal: {
+                    color: '#5ab1ef',
+                    // 尾迹线条宽度
+                    width: 1,
+                    // 尾迹线条透明度
+                    opacity: 1,
+                    // 尾迹线条曲直度
+                    curveness: 0.3
+                }
+            },
+            data: convertToLineData(mapData)
+        }]
+    }]
+});
+
 const option5 = ref({
     header: [
         "姓名",
@@ -271,6 +459,7 @@ const option5 = ref({
     ],
     columnWidth: [],
     data: [],
+    rowNum: 3,
 })
 
 const option6 = ref({
@@ -286,6 +475,7 @@ const option6 = ref({
     ],
     columnWidth: [100, 80, 50, 75, 80, 80, 100],
     data: [],
+    rowNum: 3,
 })
 
 const chart7 = ref(null)
@@ -316,7 +506,7 @@ const option7 = ref({
 const option8 = ref({
     grid: {
         top: '15%',
-        bottom: '15%'
+        bottom: '20%'
     },
     xAxis: {
         type: 'category',
@@ -368,7 +558,8 @@ const option8 = ref({
 })
 const option9 = ref({
     grid: {
-        top: '15%'
+        top: '15%',
+        bottom: '20%'
     },
     tooltip: {
         trigger: 'axis',
@@ -550,10 +741,15 @@ function setOption4(objs) {
 
 }
 
+function maskName(name) {
+    if (!name || name.length === 0) return '';
+    if (name.length === 1) return name;
+    return name.charAt(0) + '*'.repeat(name.length - 1);
+}
 function setOption5(datas) {
     let data = datas.map(_ => {
         return [
-            _.name,
+            maskName(_.name),
             _.age,
             _.community,
             _.health_index,
@@ -568,7 +764,7 @@ function setOption6(datas) {
     let data = datas.map(_ => {
         return [
             _.work_order_id,
-            _.name,
+            maskName(_.name),
             _.age,
             _.community,
             _.therapy_item,

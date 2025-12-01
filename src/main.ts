@@ -9,11 +9,13 @@ import * as echarts from 'echarts';
 // 确保主题注册后再创建应用
 import theme from '@/utils/theme.ts';
 echarts.registerTheme('myTheme', theme);
-
+import shanxi from './shanxi.json'
+console.log(shanxi)
+echarts.registerMap('shanxi', shanxi);
+//  const mapExists = echarts.getMap('shanxi');
+//   console.log('Shanxi map registered:', !!mapExists);
+// console.log(shanxi)
 import VChart from 'vue-echarts';
-
-
-
 
 const app = createApp(App)
 

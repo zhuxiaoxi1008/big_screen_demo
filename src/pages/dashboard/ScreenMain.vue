@@ -29,12 +29,12 @@
                             <span class="digital-label">本月检测</span>
                         </div>
                         <div class="flex-1 flex flex-col justify-center">
-                            <span class="digital-number-sm">{{ option2.quarterly_checks }}</span>
-                            <span class="digital-label">季度检测</span>
+                            <span class="digital-number-sm">{{ option2.quarterly_checks }}<span class="ml-2 text-sm">次</span></span>
+                            <span class="digital-label">本月异常次数</span>
                         </div>
                         <div class="flex-1 flex flex-col justify-center">
-                            <span class="digital-number-sm">{{ option2.cumulative_checks }}</span>
-                            <span class="digital-label">累计检测</span>
+                            <span class="digital-number-sm">{{ option2.cumulative_checks }}%</span>
+                            <span class="digital-label">本月异常率</span>
                         </div>
                     </div>
                 </div>

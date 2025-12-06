@@ -19,7 +19,7 @@
 <style lang="scss" scoped>
 .screen-footer {
     display: flex;
-    height: 22px;
+    height: 16px;
 
     .screen-footer-left {
         width: 35%;

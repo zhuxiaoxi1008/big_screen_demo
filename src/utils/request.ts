@@ -6,7 +6,7 @@ const baseURL = '/' // 根据项目需要调整
 const defaultTimeout = 10000
 
 const http = axios.create({
-    baseURL,
+    baseURL: '/api',
     timeout: defaultTimeout,
     headers: {
         'Content-Type': 'application/json',

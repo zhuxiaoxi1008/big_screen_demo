@@ -11,34 +11,18 @@
                     <VChart ref="chart1" class="flex-1" :option="option1" theme="myTheme" />
                 </div>
             </dv-border-box-12>
+
             <dv-border-box-12 class="flex-col-full">
                 <div class="card-title">
-                    <i class="iconfont icon-align-left"></i>
-                    <span class="card-label">健康检测异常统计</span>
+                    <i class="iconfont icon-supervise"></i>
+                    <span class="card-label">健康预警统计</span>
                     <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
                 </div>
-                <div class="chart-container p-8">
-                    <!-- <dv-capsule-chart class="flex-1 mx-8" :config="option2"></dv-capsule-chart> -->
-                    <div class="flex-1 flex justify-between items-center px-16">
-                        <span class="digital-label">健康检测次数</span>
-                        <span class="digital-number">{{ option2.total_checks }}</span>
-                    </div>
-                    <div class="flex-1 flex justify-between items-center">
-                        <div class="flex-1 flex flex-col justify-center">
-                            <span class="digital-number-sm">{{ option2.monthly_checks }}</span>
-                            <span class="digital-label">本月检测</span>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center">
-                            <span class="digital-number-sm">{{ option2.quarterly_checks }}<span class="ml-2 text-sm">次</span></span>
-                            <span class="digital-label">本月异常次数</span>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center">
-                            <span class="digital-number-sm">{{ option2.cumulative_checks }}%</span>
-                            <span class="digital-label">本月异常率</span>
-                        </div>
-                    </div>
+                <div class="chart-container">
+                    <VChart ref="chart7" class="flex-1" :option="option7" theme="myTheme" />
                 </div>
             </dv-border-box-12>
+
             <dv-border-box-12 class="flex-col-full">
                 <div class="card-title">
                     <i class="iconfont icon-tongji2"></i>
@@ -51,16 +35,6 @@
             </dv-border-box-12>
         </div>
         <div class="flex-long-col-full">
-            <!-- <dv-border-box-12 class="flex-col-full">
-                <div class="card-title">
-                    <i class="iconfont icon-zhibiao2"></i>
-                    <span class="card-label">残疾等级分类统计</span>
-                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
-                </div>
-                <div class="chart-container">
-                    <VChart ref="chart4" class="flex-1" :option="option4" theme="myTheme" />
-                </div>
-            </dv-border-box-12> -->
             <dv-border-box-12 class="flex-col-full px-4 py-4">
                 <VChart ref="chartMap" class="flex-1" :option="mapOption" theme="myTheme" />
             </dv-border-box-12>
@@ -71,7 +45,7 @@
                     <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
                 </div>
                 <div class="chart-container px-4 pb-4">
-                    <dv-scroll-board :config="option5" class="h-full w-full" />
+                    <dv-scroll-board :config="option5" class="h-full w-full" @click="handleCustormDetail" />
                 </div>
             </dv-border-box-12>
             <dv-border-box-12 class="flex flex-col" style="height: 200px;">
@@ -81,11 +55,39 @@
                     <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
                 </div>
                 <div class="chart-container px-4 pb-4">
-                    <dv-scroll-board :config="option6" class="h-full w-full" />
+                    <dv-scroll-board :config="option6" class="h-full w-full" @click="handleWorkOrderDetail" />
                 </div>
             </dv-border-box-12>
         </div>
         <div class="flex-col-full">
+            <dv-border-box-12 class="flex-col-full">
+                <div class="card-title">
+                    <i class="iconfont icon-align-left"></i>
+                    <span class="card-label">健康检测异常统计</span>
+                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
+                </div>
+                <div class="chart-container px-8 pb-2">
+                    <div class="flex-1 flex justify-between items-center px-16">
+                        <span class="digital-label">健康检测次数</span>
+                        <span class="digital-number">{{ option2.total_checks }}</span>
+                    </div>
+                    <div class="flex-1 flex justify-between items-center">
+                        <div class="flex-1 flex flex-col justify-center">
+                            <span class="digital-number-sm">{{ option2.monthly_checks }}</span>
+                            <span class="digital-label">本月检测</span>
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <span class="digital-number-sm">{{ option2.monthly_exceptions }}<span
+                                    class="ml-2 text-sm">次</span></span>
+                            <span class="digital-label">本月异常次数</span>
+                        </div>
+                        <div class="flex-1 flex flex-col justify-center">
+                            <span class="digital-number-sm">{{ option2.monthly_exception_rate }}%</span>
+                            <span class="digital-label">本月异常率</span>
+                        </div>
+                    </div>
+                </div>
+            </dv-border-box-12>
             <dv-border-box-12 class="flex-col-full">
                 <div class="card-title">
                     <i class="iconfont icon-zhibiao2"></i>
@@ -95,16 +97,6 @@
                 <div class="chart-container">
                     <VChart ref="chart4" class="flex-1" :option="option4" theme="myTheme" />
                 </div>
-            </dv-border-box-12> 
-            <dv-border-box-12 class="flex-col-full">
-                <div class="card-title">
-                    <i class="iconfont icon-supervise"></i>
-                    <span class="card-label">健康预警统计</span>
-                    <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
-                </div>
-                <div class="chart-container">
-                    <VChart ref="chart7" class="flex-1" :option="option7" theme="myTheme" />
-                </div>
             </dv-border-box-12>
             <dv-border-box-12 class="flex-col-full">
                 <div class="card-title">
@@ -112,28 +104,295 @@
                     <span class="card-label">报警处理情况</span>
                     <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
                 </div>
-                <div class="chart-container">
-                    <VChart ref="chart8" class="flex-1" :option="option8" theme="myTheme" />
+                <div class="chart-container px-16 space-y-2">
+                    <div class="alert-header mt-[-30px]">
+                        <div class="w-[30px]"></div>
+                        <div class="w-[100px]"></div>
+                        <div class="">
+                            <span class="alert-num-sub">未处理/离线</span>
+                        </div>
+                        <div class="">
+                            <span class="alert-num-sub">已处理/在线</span>
+                        </div>
+                    </div>
+                    <div class="alert-container">
+                        <img :src="sos" class="alert-img" />
+                        <span class="alert-label">SOS报警</span>
+                        <div class="alert-item">
+                            <span class="alert-num">{{ option8.sos_alerts.pending }}</span>
+                        </div>
+                        <div class="alert-item">
+                            <span class="alert-num-resolve">{{ option8.sos_alerts.resolved }}</span>
+                        </div>
+                    </div>
+                    <div class="alert-container">
+                        <img :src="falldown" class="alert-img" />
+                        <span class="alert-label">跌倒报警</span>
+                        <div class="alert-item">
+                            <span class="alert-num">{{ option8.fall_alerts.pending }}</span>
+                        </div>
+                        <div class="alert-item">
+                            <span class="alert-num-resolve">{{ option8.fall_alerts.resolved }}</span>
+                        </div>
+                    </div>
+                    <div class="alert-container">
+                        <img :src="fence" class="alert-img" />
+                        <span class="alert-label">电子围栏报警</span>
+                        <div class="alert-item">
+                            <span class="alert-num">{{ option8.geo_fence_alerts.pending }}</span>
+                        </div>
+                        <div class="alert-item">
+                            <span class="alert-num-resolve">{{ option8.geo_fence_alerts.resolved }}</span>
+                        </div>
+                    </div>
+                    <div class="alert-container">
+                        <img :src="heart" class="alert-img" />
+                        <span class="alert-label">心率报警</span>
+                        <div class="alert-item">
+                            <span class="alert-num">{{ option8.heart_rate_alerts.pending }}</span>
+                        </div>
+                        <div class="alert-item">
+                            <span class="alert-num-resolve">{{ option8.heart_rate_alerts.resolved }}</span>
+                        </div>
+                    </div>
+                    <div class="alert-container">
+                        <img :src="watch" class="alert-img" />
+                        <span class="alert-label">设备状态</span>
+                        <div class="alert-item">
+                            <span class="alert-num">{{ option8.device_status_alerts.pending }}</span>
+                        </div>
+                        <div class="alert-item">
+                            <span class="alert-num-resolve">{{ option8.device_status_alerts.resolved }}</span>
+                        </div>
+                    </div>
                 </div>
             </dv-border-box-12>
-            <dv-border-box-12 class="flex-col-full">
+            <dv-border-box-12 class="h-[220px] flex-1 flex flex-col">
                 <div class="card-title">
                     <i class="iconfont icon-chart-line"></i>
                     <span class="card-label">智能设备信息</span>
                     <dv-decoration-3 class="dv-dec-size"></dv-decoration-3>
                 </div>
-                <div class="chart-container">
-                    <VChart ref="chart9" class="flex-1" :option="option9" theme="myTheme" />
+                <div class="chart-container px-8 pb-4">
+                    <table class="device-table">
+                        <thead>
+                            <tr>
+                                <th>设备名称</th>
+                                <th>设备数量</th>
+                                <th>设备网络异常</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(divice, k) in option9" :key="k">
+                                <td>{{ divice.name }}</td>
+                                <td class="font-bold text-xl">{{ divice.total }}</td>
+                                <td class="text-red-400 font-bold text-xl">{{ divice.error }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </dv-border-box-12>
         </div>
+
+        <CustomDialog v-model="showDialog1" title="客户详情" width="800px">
+            <div class="customer-detail-container">
+                <!-- Basic Information Section -->
+                <div class="detail-section">
+                    <h3 class="section-title">基本信息</h3>
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <span class="detail-label">姓名:</span>
+                            <span class="detail-value">{{ userDetail.name }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">客户ID:</span>
+                            <span class="detail-value">{{ userDetail.customer_id }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">性别:</span>
+                            <span class="detail-value">{{ userDetail.gender }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">联系电话:</span>
+                            <span class="detail-value">{{ userDetail.phone }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">年龄:</span>
+                            <span class="detail-value">{{ userDetail.age }}岁</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">所属社区:</span>
+                            <span class="detail-value">{{ userDetail.community }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disability Information Section -->
+                <div class="detail-section">
+                    <h3 class="section-title">残疾信息</h3>
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <span class="detail-label">残疾类型:</span>
+                            <span class="detail-value">{{ userDetail.disability_type }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">残疾等级:</span>
+                            <span class="detail-value">{{ userDetail.disability_level }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Information Section -->
+                <div class="detail-section">
+                    <h3 class="section-title">服务信息</h3>
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <span class="detail-label">注册日期:</span>
+                            <span class="detail-value">{{ userDetail.registered_date }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">最近服务:</span>
+                            <span class="detail-value">{{ userDetail.last_service_date }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">服务类型:</span>
+                            <div class="detail-value">
+                                <span v-for="(service, index) in userDetail.service_type" :key="index"
+                                    class="service-tag">
+                                    {{ service }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">当前状态:</span>
+                            <span class="detail-value status-badge"
+                                :class="userDetail.status === '正常' ? 'status-normal' : 'status-abnormal'">
+                                {{ userDetail.status }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </CustomDialog>
+
+        <CustomDialog v-model="showDialog2" title="工单详情" width="800px">
+            <div class="customer-detail-container">
+                <!-- Basic Information Section -->
+                <div class="detail-section">
+                    <h3 class="section-title">基本信息</h3>
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <span class="detail-label">工单编号:</span>
+                            <span class="detail-value">{{ workOrderDetail.work_order_id }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">客户ID:</span>
+                            <span class="detail-value">{{ workOrderDetail.customer_id }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">客户姓名:</span>
+                            <span class="detail-value">{{ workOrderDetail.customer_name }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">服务类型:</span>
+                            <span class="detail-value">{{ workOrderDetail.service_type }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">优先级:</span>
+                            <span class="detail-value">
+                                <span class="priority-badge"
+                                    :class="`priority-${workOrderDetail.priority.toLowerCase()}`">
+                                    {{ workOrderDetail.priority }}
+                                </span>
+                            </span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">当前状态:</span>
+                            <span class="detail-value">
+                                <span class="status-badge" :class="getStatusClass(workOrderDetail.status)">
+                                    {{ workOrderDetail.status }}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Information Section -->
+                <div class="detail-section">
+                    <h3 class="section-title">服务信息</h3>
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <span class="detail-label">服务项目:</span>
+                            <span class="detail-value">{{ workOrderDetail.service_item }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">服务人员:</span>
+                            <span class="detail-value">{{ workOrderDetail.service_personnel }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">服务站点:</span>
+                            <span class="detail-value">{{ workOrderDetail.service_station }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">预约时间:</span>
+                            <span class="detail-value">{{ workOrderDetail.scheduled_time }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">开始时间:</span>
+                            <span class="detail-value">{{ workOrderDetail.start_time || '-' }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">结束时间:</span>
+                            <span class="detail-value">{{ workOrderDetail.end_time || '-' }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information Section -->
+                <div class="detail-section">
+                    <h3 class="section-title">其他信息</h3>
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <span class="detail-label">创建时间:</span>
+                            <span class="detail-value">{{ workOrderDetail.create_time }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">服务结果:</span>
+                            <span class="detail-value">{{ workOrderDetail.result || '-' }}</span>
+                        </div>
+                        <div class="detail-row full-row">
+                            <span class="detail-label">备注说明:</span>
+                            <span class="detail-value">{{ workOrderDetail.remarks || '-' }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </CustomDialog>
+
+        <SoundAlarm ref="soundAlarmRef"/>
     </div>
 </template>
 
 <script setup lang="ts">
-import { getDashboardData } from '@/apis/dashboardApi';
+import { getDashboardData, getAlterData, getCustormData, getWorkOrderData } from '@/apis/dashboardApi';
+import CustomDialog from '@/components/CustomDialog.vue'
+import SoundAlarm from '@/components/SoundAlarm.vue'
 
-import { ref } from 'vue';
+const showDialog1 = ref(false)
+const userDetail = ref({})
+const showDialog2 = ref(false)
+const workOrderDetail = ref({})
+
+const soundAlarmRef = ref(null)
+
+import sos from '@/assets/imgs/icon/sos.svg'
+import falldown from '@/assets/imgs/icon/falldown.svg'
+import heart from '@/assets/imgs/icon/heart.svg'
+import fence from '@/assets/imgs/icon/fence.svg'
+import watch from '@/assets/imgs/icon/watch.svg'
+
+
+import { ref, nextTick } from 'vue';
 
 const option1 = ref({
     tooltip: {
@@ -150,7 +409,8 @@ const option1 = ref({
         data: [],
         axisLabel: {
             rotate: 15,
-            margin: 15
+            margin: 15,
+            fontSize: 14,
         }
     },
     yAxis: {
@@ -164,7 +424,7 @@ const option1 = ref({
                 show: true,
                 position: 'top',
                 color: '#ffffff',
-                fontSize: 12,
+                fontSize: 14,
                 formatter: function (params) {
                     return `${params.value} 人`
                 }
@@ -174,14 +434,12 @@ const option1 = ref({
     ]
 })
 const option2 = ref({
-    // data: [],
-    // unit: '次',
-    // showValue: true
-    cumulative_checks: 71925,
-    description: "健康检测相关数据统计",
-    monthly_checks: 7202,
-    quarterly_checks: 16601,
-    total_checks: 41067,
+    cumulative_checks: 0,
+    monthly_checks: 0, // 本月检测次数
+    monthly_exception_rate: 0, // 本月异常率
+    monthly_exceptions: 0, // 本月异常次数
+    quarterly_checks: 0,
+    total_checks: 0, // 总检查次数
 })
 const option3 = ref({
     tooltip: {
@@ -195,8 +453,11 @@ const option3 = ref({
             type: 'pie',
             radius: ['55%', '70%'],
             label: {
+                textMargin: 5,
+                minMagin: 5,
+                fontSize: 16,
                 formatter: function (params) {
-                    return `${params.name}\n${params.value} 人 - (${params.percent}%)`
+                    return `${params.name}-${params.value}人\n${params.percent}%`
                 }
             },
             data: []
@@ -210,23 +471,6 @@ const chart3 = ref(null)
 
 const chart4 = ref(null)
 const option4 = ref({
-    // level_one: {
-    //     count: 0,
-    //     percentage: 0
-    // },
-    // level_two: {
-    //     count: 0,
-    //     percentage: 0
-    // },
-    // level_three: {
-    //     count: 0,
-    //     percentage: 0
-    // },
-    // level_four: {
-    //     count: 0,
-    //     percentage: 0
-    // },
-
     tooltip: {
         trigger: 'item'
     },
@@ -238,9 +482,12 @@ const option4 = ref({
             type: 'pie',
             radius: ['55%', '70%'],
             label: {
+                textMargin: 5,
+                minMagin: 5,
+                fontSize: 16,
                 formatter: function (params) {
-                    return `${params.name}\n${params.value} 人 - (${params.percent}%)`
-                }
+                    return `${params.name}-${params.value}人\n${params.percent}%`
+                },
             },
             data: []
         }
@@ -270,7 +517,7 @@ for (var key in geoCoordMap) {
 }
 
 // 输出json对象数组,value里包含坐标值和随机值
-function convertData (data) {
+function convertData(data) {
     var res = []
     for (var i = 0; i < data.length; i++) {
         var geoCoord = geoCoordMap[data[i].name]
@@ -282,28 +529,8 @@ function convertData (data) {
     return res
 }
 
-//  设置目标点, 配置线条指向
-// function convertToLineData (data) {
-//     var res = []
-//     for (var i = 0; i < data.length; i++) {
-//         // 起点
-//         var fromCoord = geoCoordMap[data[i].name]
-//         //  终点,这里设置的西安
-//         var toCoord = [108.948024, 34.263161]
-//         res.push([
-//             {
-//                 coord: fromCoord,
-//                 value: data[i].value
-//             },
-//             {
-//                 coord: toCoord
-//             }
-//         ])
-//     }
-//     return res
-// }
 // 设置目标点, 配置线条指向
-function convertToLineData (data) {
+function convertToLineData(data) {
     var res = []
     for (var i = 0; i < data.length; i++) {
         // 起点,这里设置的西安
@@ -340,12 +567,15 @@ const mapOption = ref({
             label: {
                 normal: {
                     show: false, // 显示标签
-                    // color: '#ffffff', // 设置字体为白色
-                    // fontSize: 12
+                    color: '#ffffff', // 设置字体为白色
+                    fontSize: 16, // 增大字体大小
+                    fontWeight: 'bold' // 加粗字体
                 },
                 emphasis: {
                     show: false, // 高亮时也显示标签
-                    // color: '#ffffff' // 高亮时字体为白色
+                    color: '#ffffff', // 高亮时字体为白色
+                    fontSize: 18, // 高亮时更大字体
+                    fontWeight: 'bold'
                 }
             },
             itemStyle: {
@@ -365,7 +595,7 @@ const mapOption = ref({
                         {
                             offset: 1,
                             // 100% 处的颜色
-                             color: 'rgba(45, 140, 240, 0.3)'
+                            color: 'rgba(45, 140, 240, 0.3)'
                         }]
                     },
                     shadowColor: 'rgba(45, 140, 240, 0.3)',
@@ -395,7 +625,7 @@ const mapOption = ref({
             coordinateSystem: 'geo',
             data: convertData(mapData),
             symbolSize: function (val) {
-                return val[2] / 10
+                return val[2] / 25
             },
             showEffectOn: 'render',
             rippleEffect: {
@@ -406,7 +636,13 @@ const mapOption = ref({
                     formatter: '{b}',
                     position: 'right',
                     show: true,
-                    color: '#ffffff' // 白色标签文字
+                    color: '#ffffff', // 白色标签文字
+                    fontSize: 20, // 增大字体
+                    fontWeight: 'bold' // 加粗字体
+                },
+                emphasis: {
+                    fontSize: 24, // 高亮时更大字体
+                    fontWeight: 'bold'
                 }
             },
             itemStyle: {
@@ -455,9 +691,9 @@ const option5 = ref({
         "社区",
         "健康指标",
         "监测结果",
-        "报警提示"
+        "检查时间"
     ],
-    columnWidth: [],
+    columnWidth: [80, 80, 120, 120, 120],
     data: [],
     rowNum: 3,
 })
@@ -479,8 +715,6 @@ const option6 = ref({
 })
 
 const chart7 = ref(null)
-const chart8 = ref(null)
-const chart9 = ref(null)
 
 const option7 = ref({
     tooltip: {
@@ -494,8 +728,11 @@ const option7 = ref({
             type: 'pie',
             radius: '70%',
             label: {
+                textMargin: 5,
+                minMagin: 5,
+                fontSize: 16,
                 formatter: function (params) {
-                    return `${params.name}\n${params.value} 次 - (${params.percent}%)`
+                    return `${params.name}-${params.value}次\n${params.percent}%`
                 }
             },
             data: [],
@@ -503,94 +740,17 @@ const option7 = ref({
         }
     ]
 })
+
 const option8 = ref({
-    grid: {
-        top: '15%',
-        bottom: '20%'
-    },
-    xAxis: {
-        type: 'category',
-        data: ["未处理", "报警解除", "已处理"]
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            data: [{
-                value: 0,
-                name: "未处理",
-                itemStyle: {
-                    color: '#ed3f14'
-                },
-                label: {
-                    show: true,
-                    position: 'top',
-                    color: '#ed3f14',
-                }
-            }, {
-                value: 0,
-                name: "报警解除",
-                itemStyle: {
-                    color: '#19be6b'
-                },
-                label: {
-                    show: true,
-                    position: 'top',
-                    color: '#19be6b',
-                }
-            }, {
-                value: 0,
-                name: "已处理",
-                itemStyle: {
-                    color: '#2d8cf0'
-                },
-                label: {
-                    show: true,
-                    position: 'top',
-                    color: '#2d8cf0',
-                }
-            }],
-            type: 'bar',
-            barWidth: '30%',
-        }
-    ]
+    "is_critical": false,
+    "sos_alerts": { "pending": 0, "resolved": 0 },
+    "fall_alerts": { "pending": 0, "resolved": 0 },
+    "geo_fence_alerts": { "pending": 0, "resolved": 0 },
+    "heart_rate_alerts": { "pending": 0, "resolved": 0 },
+    "device_status_alerts": { "pending": 0, "resolved": 0 }
 })
-const option9 = ref({
-    grid: {
-        top: '15%',
-        bottom: '20%'
-    },
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'shadow'
-        }
-    },
-    legend: {
-        top: '0%'
-    },
-    xAxis: {
-        type: 'category',
-        data: []
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            name: '总数',
-            data: [],
-            type: 'line'
-        },
-        {
-            name: '在线',
-            data: [],
-            type: 'bar',
-            barWidth: "20%"
-        }
-    ]
-})
+
+const option9 = ref([])
 
 
 getDashboardData().then(res => {
@@ -598,6 +758,21 @@ getDashboardData().then(res => {
     setMiddleOption(res.middle_section)
     setRightOption(res.right_section)
 })
+
+function queryAlert() {
+    getAlterData().then(res => {
+        setOption8(res.data.alert_statistics)
+        setOption9(res.data.device_operation_status)
+    })
+}
+
+queryAlert()
+
+setInterval(() => {
+    queryAlert()
+}, 10  * 1000); // 每5分钟查询一次
+
+
 
 function setLeftOption(datas) {
     let service_categories = datas.service_categories
@@ -640,13 +815,6 @@ function setOption1(datas) {
 }
 
 function setOption2(datas) {
-    // let { total_checks, quarterly_checks, monthly_checks, cumulative_checks } = datas
-    // option2.value.data = [
-    //     { value: total_checks, name: '总检查' },
-    //     { value: quarterly_checks, name: '季度检查' },
-    //     { value: monthly_checks, name: '月度检查' },
-    //     { value: cumulative_checks, name: '累计检查' },
-    // ]
     option2.value = datas
 }
 
@@ -708,8 +876,13 @@ function setOption4(objs) {
     // option4.value.level_two = objs.level_two
     // option4.value.level_three = objs.level_three
     // option4.value.level_four = objs.level_four
+    objs.level_one.description = '一级(重度)'
+    objs.level_two.description = '二级(中重度)'
+    objs.level_three.description = '三级(中度)'
+    objs.level_four.description = '四级(轻度)'
+
     let datas = [objs.level_one, objs.level_two, objs.level_three, objs.level_four]
-    console.log('option4', datas)
+    // console.log('option4', datas)
     let total = datas.reduce((sum, item) => sum + item.count, 0)
     let data = datas.map(_ => {
         return {
@@ -753,8 +926,8 @@ function setOption5(datas) {
             _.age,
             _.community,
             _.health_index,
+            _.alarm,
             _.monitoring_result,
-            _.alert_info
         ]
     })
     option5.value.data = data
@@ -779,8 +952,6 @@ function setOption6(datas) {
 
 function setRightOption(datas) {
     setOption7(datas.health_alerts)
-    setOption8(datas.alert_handling)
-    setOption9(datas.devices)
 }
 
 function setOption7(datas) {
@@ -794,30 +965,95 @@ function setOption7(datas) {
     chart7.value && chart7.value.setOption(option7.valule)
 }
 
-function setOption8(datas) {
-    let pending = datas.pending
-    let processed = datas.processed
-    let resolved = datas.resolved
-    option8.value.series[0].data[0].value = pending
-    option8.value.series[0].data[1].value = processed
-    option8.value.series[0].data[2].value = resolved
-
-    chart8.value && chart8.value.setOption(option8.valule)
-}
-
-function setOption9(datas) {
-    let xAxisData = datas.map(_ => _.name) || []
-    let seriesData1 = datas.map(_ => _.total_count) || []
-    let seriesData2 = datas.map(_ => _.online_count) || []
-
-    option9.value.xAxis.data = xAxisData
-    option9.value.series[0].data = seriesData1
-    option9.value.series[1].data = seriesData2
-    chart9.value && chart9.value.setOption(option9.valule)
+async function setOption8(objs) {
+    // TODO 测试数据
+    console.log('option8', objs);
+    objs.is_critical = true;
+    option8.value = objs;
+    // 判断是否有未处理的紧急求助报警
+    if(option8.value.is_critical) {
+        await nextTick()
+        soundAlarmRef.value.play();
+    }
 }
 
 
+function setOption9(objs) {
+    // option9.value = objs;
+    // console.log('option9', objs);
+    //door_sensor : {device_count: 288, abnormal_count: 17} elderly_care_gateway : {device_count: 92, abnormal_count: 3} emergency_button : {device_count: 214, abnormal_count: 13} infrared_sensor : {device_count: 247, abnormal_count: 5} smoke_sensor : {device_count: 128, abnormal_count: 14} water_sensor : {device_count: 190, abnormal_count: 4} 翻译成中文
+    let res = []
+    res.push({
+        name: '门磁传感器',
+        total: objs.door_sensor.device_count,
+        error: objs.door_sensor.abnormal_count
+    })
+
+    res.push({
+        name: ' 智能网关(4G)',
+        total: objs.elderly_care_gateway.device_count,
+        error: objs.elderly_care_gateway.abnormal_count
+    })
+
+    res.push({
+        name: '紧急按钮',
+        total: objs.emergency_button.device_count,
+        error: objs.emergency_button.abnormal_count
+    })
+
+    res.push({
+        name: '红外传感器',
+        total: objs.infrared_sensor.device_count,
+        error: objs.infrared_sensor.abnormal_count
+    })
+
+    res.push({
+        name: '烟雾传感器',
+        total: objs.smoke_sensor.device_count,
+        error: objs.smoke_sensor.abnormal_count
+    })
+
+    res.push({
+        name: '水浸传感器',
+        total: objs.water_sensor.device_count,
+        error: objs.water_sensor.abnormal_count
+    })
+
+    option9.value = res;
+}
+
+
+
+const handleCustormDetail = (data) => {
+    console.log('点击了行数据:', data.row);
+    getCustormData('CUST-001').then(res => {
+        userDetail.value = res.data
+        showDialog1.value = true
+    })
+}
+
+const handleWorkOrderDetail = (data) => {
+    console.log('点击了行数据:', data.row);
+    getWorkOrderData(data.row[0]).then(res => {
+        workOrderDetail.value = res.data
+        showDialog2.value = true
+    })
+}
+
+function getStatusClass(status) {
+    const statusMap = {
+        '已完成': 'status-normal',
+        '进行中': 'status-warning',
+        '已取消': 'status-abnormal',
+        '待处理': 'status-pending'
+    };
+    return statusMap[status] || 'status-default';
+}
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.dv-scroll-board .rows .ceil {
+    font-size: 16px;
+}
+</style>

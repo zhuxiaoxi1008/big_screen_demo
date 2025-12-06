@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: 100vh;
     width: 100vw;
     margin: 0;
@@ -15,6 +16,7 @@ html, body {
     @apply h-[40px] text-white flex items-center space-x-2 ml-6 pt-4;
 }
 
+
 .chart-container {
     height: calc(100% - 40px);
     width: 100%;
@@ -22,8 +24,8 @@ html, body {
     flex-direction: column;
 }
 
-.cart-label {
-    @apply text-sm;
+.card-label {
+   font-size: 16px;
 }
 
 .iconfont {
@@ -46,14 +48,14 @@ html, body {
 }
 
 .digital-number {
-    font-family: 'Digital-7', monospace;
+    font-family: "Digital-7", monospace;
     font-size: 60px;
     color: lightblue;
     text-align: center;
 }
 
 .digital-number-sm {
-    font-family: 'Digital-7', monospace;
+    font-family: "Digital-7", monospace;
     font-size: 40px;
     color: lightblue;
     text-align: center;
@@ -67,4 +69,222 @@ html, body {
 
 .flex-center {
     @apply flex justify-center items-center;
+}
+
+
+.alert-container {
+    color: lightblue;
+    @apply h-[32px] flex justify-between items-center;
+}
+
+.alert-header {
+    @apply flex justify-between items-center;
+}
+
+.alert-img {
+    width: 30px;
+    height: 30px;
+}
+
+.alert-label {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    width: 120px;
+}
+
+.alert-num {
+    font-size: 30px;
+    line-height: 30px;
+    @apply text-red-400 font-bold;;
+}
+
+.alert-num-resolve {
+    font-size: 30px;
+    line-height: 30px;
+    @apply text-green-400 font-bold;
+}
+
+.alert-num-sub {
+    font-size: 16px;
+    line-height: 16px;
+    color: lightblue;
+} 
+
+.alert-item {
+    @apply w-[80px] flex flex-col justify-center items-center;
+}
+
+
+
+/** option 9 */
+.device-table {
+    flex: 1;
+    width: 100%;
+    border-collapse: collapse;
+    color: lightblue;
+    font-size: 16px;
+    
+    th, td {
+        border: 1px solid lightblue;
+        text-align: center;
+        vertical-align: middle;
+        padding: 0px 4px;
+    }
+    
+    thead {
+        th {
+            font-weight: bold;
+            text-align: center;
+            vertical-align: middle;
+            padding: 0px 4px;
+            /* background-color: rgba(173, 216, 230, 0.15); */
+        }
+    }
+}
+
+
+
+/** 弹框样式 */
+.customer-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-section {
+  padding: 20px;
+  background: rgba(13, 27, 42, 0.6);
+  border-radius: 10px;
+  border: 1px solid rgba(92, 217, 232, 0.2);
+}
+
+.section-title {
+  color: #5cd9e8;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(92, 217, 232, 0.2);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+}
+
+.detail-label {
+  width: 100px;
+  color: #5cd9e8;
+  font-weight: 500;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  flex: 1;
+  color: #e0f7fa;
+  font-size: 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.service-tag {
+  background: rgba(92, 217, 232, 0.2);
+  color: #5cd9e8;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.status-badge {
+  padding: 4px 16px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.status-normal {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+
+.status-abnormal {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 1920px) {
+  .detail-label {
+    width: 120px;
+    font-size: 18px;
+  }
+  
+  .detail-value {
+    font-size: 18px;
+  }
+  
+  .service-tag {
+    font-size: 16px;
+  }
+  
+  .section-title {
+    font-size: 20px;
+  }
+}
+
+
+/** 工单详情 */
+
+.priority-high {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.priority-medium {
+  background: rgba(241, 196, 15, 0.2);
+  color: #f1c40f;
+}
+
+.priority-low {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+
+.priority-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.status-warning {
+  background: rgba(241, 196, 15, 0.2);
+  color: #f1c40f;
+}
+
+.status-pending {
+  background: rgba(155, 89, 182, 0.2);
+  color: #9b59b6;
+}
+
+.status-default {
+  background: rgba(149, 165, 166, 0.2);
+  color: #95a5a6;
+}
+
+.full-row {
+  grid-column: 1 / -1;
+}
+
+.full-row .detail-value {
+  justify-content: flex-start;
 }

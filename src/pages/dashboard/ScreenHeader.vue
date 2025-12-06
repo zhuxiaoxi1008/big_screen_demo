@@ -69,7 +69,7 @@ const handleTime = () => {
 
 <style lang="scss" scoped>
 .screen-header {
-    height: 45px;
+    height: 40px;
     box-sizing: border-box;
 
     .screen-header-top-section {
@@ -90,6 +90,7 @@ const handleTime = () => {
                 text-align: center;
 
                 .header-title {
+                    margin-top: -18px;
                     background-color: transparent;
                     font-size: $lg-font-size;
                     font-weight: 550;

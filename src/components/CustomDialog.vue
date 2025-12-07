@@ -5,9 +5,9 @@
       <div class="dialog-container" :style="dialogStyle" @click.stop>
         <!-- Dialog Header -->
         <div class="dialog-header">
-          <slot name="header">
+          <!-- <slot name="header">
             <h3 v-if="title" class="dialog-title">{{ title }}</h3>
-          </slot>
+          </slot> -->
           <button 
             v-if="showClose" 
             class="dialog-close-button" 
@@ -24,9 +24,9 @@
         </div>
         
         <!-- Dialog Footer -->
-        <div v-if="$slots.footer" class="dialog-footer">
+        <!-- <div v-if="$slots.footer" class="dialog-footer">
           <slot name="footer"></slot>
-        </div>
+        </div> -->
       </div>
     </div>
   </teleport>
@@ -59,6 +59,10 @@ const props = defineProps({
   closeOnClickOverlay: {
     type: Boolean,
     default: true
+  },
+  zIndex: {
+    type: Number,
+    default: 2000,
   }
 })
 
@@ -110,7 +114,7 @@ onUnmounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: v-bind('zIndex');
   backdrop-filter: blur(2px);
 }
 

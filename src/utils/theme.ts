@@ -377,6 +377,9 @@ const theme = {
         }
     },
     tooltip: {
+        textStyle: {
+            fontSize: 20,
+        },
         axisPointer: {
             lineStyle: {
                 color: '#ccc',
@@ -386,7 +389,8 @@ const theme = {
                 color: '#ccc',
                 width: 1
             }
-        }
+        },
+        
     },
     timeline: {
         lineStyle: {

@@ -368,31 +368,59 @@
                 </div>
             </div>
         </CustomDialog>
+        <CustomDialog v-model="showDialog3" title="报警信息" width="800px" :z-index="9999">
+            <div class="customer-detail-container">
+                <div>
+                    <SoundAlarm ref="soundAlarmRef" />
+                </div>
+                <div class="detail-section">
+                    <h3 class="section-title">报警详情</h3>
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <span class="detail-label">姓名:</span>
+                            <span class="detail-value">{{ critical_alert.name }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">报警类型:</span>
+                            <span class="detail-value">{{ critical_alert.alert_type }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">联系方式:</span>
+                            <span class="detail-value">{{ critical_alert.contact }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </CustomDialog>
 
-        <SoundAlarm ref="soundAlarmRef"/>
+        
     </div>
 </template>
 
 <script setup lang="ts">
+import sos from '@/assets/imgs/icon/sos.svg'
+import falldown from '@/assets/imgs/icon/falldown.svg'
+import heart from '@/assets/imgs/icon/heart.svg'
+import fence from '@/assets/imgs/icon/fence.svg'
+import watch from '@/assets/imgs/icon/watch.svg'
 import { getDashboardData, getAlterData, getCustormData, getWorkOrderData } from '@/apis/dashboardApi';
 import CustomDialog from '@/components/CustomDialog.vue'
 import SoundAlarm from '@/components/SoundAlarm.vue'
+import { ref, nextTick } from 'vue';
 
 const showDialog1 = ref(false)
 const userDetail = ref({})
 const showDialog2 = ref(false)
 const workOrderDetail = ref({})
 
+const showDialog3 = ref(false)
+const critical_alert = ref({
+    "name": "",
+    "alert_type": "",
+    "contact": ""
+})
+
 const soundAlarmRef = ref(null)
-
-import sos from '@/assets/imgs/icon/sos.svg'
-import falldown from '@/assets/imgs/icon/falldown.svg'
-import heart from '@/assets/imgs/icon/heart.svg'
-import fence from '@/assets/imgs/icon/fence.svg'
-import watch from '@/assets/imgs/icon/watch.svg'
-
-
-import { ref, nextTick } from 'vue';
 
 const option1 = ref({
     tooltip: {
@@ -686,6 +714,7 @@ const mapOption = ref({
 
 const option5 = ref({
     header: [
+        "ID",
         "姓名",
         "年龄",
         "社区",
@@ -693,7 +722,7 @@ const option5 = ref({
         "监测结果",
         "检查时间"
     ],
-    columnWidth: [80, 80, 120, 120, 120],
+    columnWidth: [100, 60, 60, 120, 120, 120],
     data: [],
     rowNum: 3,
 })
@@ -743,6 +772,7 @@ const option7 = ref({
 
 const option8 = ref({
     "is_critical": false,
+    "critical_alert": null,
     "sos_alerts": { "pending": 0, "resolved": 0 },
     "fall_alerts": { "pending": 0, "resolved": 0 },
     "geo_fence_alerts": { "pending": 0, "resolved": 0 },
@@ -768,10 +798,14 @@ function queryAlert() {
 
 queryAlert()
 
-setInterval(() => {
-    queryAlert()
-}, 10  * 1000); // 每5分钟查询一次
+const startListen = ref(false)
 
+setInterval(() => {
+    if(!startListen.value) {
+        startListen.value = true
+    }
+    queryAlert()
+}, 3 * 1000); // 3秒刷新一次
 
 
 function setLeftOption(datas) {
@@ -794,23 +828,6 @@ function setOption1(datas) {
     })
     option1.value.xAxis.data = xAxisData
     option1.value.series[0].data = data
-    // option1.value.title = {
-    //     text: `${total}`,
-    //     subtext: '总人数',
-    //     subtextStyle: {
-    //         color: '#ffffff', // 改为白色，在深色背景下更清晰
-    //         fontSize: 16,
-    //         fontWeight: 'normal'
-    //     },
-    //     textStyle: {
-    //         color: '#ffffff', // 改为白色
-    //         fontSize: 20,     // 稍微增大主标题字体
-    //         fontWeight: 'bold' // 主标题加粗
-    //     },
-    //     left: '49%',
-    //     top: '42%',       // 微调垂直位置，使居中效果更好
-    //     textAlign: 'center'
-    // }
     chart1.value && chart1.value.setOption(option1.valule)
 }
 
@@ -819,18 +836,6 @@ function setOption2(datas) {
 }
 
 function setOption3(datas) {
-    // let xAxisData = []
-    // let seriesData = []
-    // xAxisData = datas.map(_ => _.type)
-    // seriesData = datas.map(_ => {
-    //     return {
-    //         value: _.count,
-    //         percentage: _.percentage,
-    //     }
-
-    // })
-    // option3.value.xAxis.data = xAxisData
-    // option3.value.series[0].data = seriesData
     let total = datas.reduce((sum, item) => sum + item.count, 0)
     let data = datas.map(_ => {
         return {
@@ -871,11 +876,6 @@ function setMiddleOption(datas) {
 }
 
 function setOption4(objs) {
-    // option2.value = option
-    // option4.value.level_one = objs.level_one
-    // option4.value.level_two = objs.level_two
-    // option4.value.level_three = objs.level_three
-    // option4.value.level_four = objs.level_four
     objs.level_one.description = '一级(重度)'
     objs.level_two.description = '二级(中重度)'
     objs.level_three.description = '三级(中度)'
@@ -920,8 +920,10 @@ function maskName(name) {
     return name.charAt(0) + '*'.repeat(name.length - 1);
 }
 function setOption5(datas) {
+    // console.log('option5', datas);
     let data = datas.map(_ => {
         return [
+            _.customer_id,
             maskName(_.name),
             _.age,
             _.community,
@@ -965,23 +967,37 @@ function setOption7(datas) {
     chart7.value && chart7.value.setOption(option7.valule)
 }
 
-async function setOption8(objs) {
-    // TODO 测试数据
-    console.log('option8', objs);
-    objs.is_critical = true;
-    option8.value = objs;
-    // 判断是否有未处理的紧急求助报警
-    if(option8.value.is_critical) {
-        await nextTick()
-        soundAlarmRef.value.play();
+
+async function setAlterInfo(objs) {
+    if(!startListen.value || showDialog3.value){
+        return
+    }
+
+    try {
+        if(objs.critical_alert){
+            critical_alert.value.name = objs.critical_alert.name;
+            critical_alert.value.alert_type = objs.critical_alert.alert_type,
+            critical_alert.value.contact = objs.critical_alert.contact;
+        }
+        showDialog3.value = objs.is_critical
+        // 判断是否有未处理的紧急求助报警
+        if (showDialog3.value && critical_alert.value.name) {
+            await nextTick()
+            setTimeout(()=>{
+                soundAlarmRef.value && soundAlarmRef.value.play();
+            },500)
+        }
+    } catch (error) {
+        console.error('Error in setAlterInfo:', error);
     }
 }
 
+function setOption8(objs) {
+    option8.value = objs;
+    setAlterInfo(objs);
+}
 
 function setOption9(objs) {
-    // option9.value = objs;
-    // console.log('option9', objs);
-    //door_sensor : {device_count: 288, abnormal_count: 17} elderly_care_gateway : {device_count: 92, abnormal_count: 3} emergency_button : {device_count: 214, abnormal_count: 13} infrared_sensor : {device_count: 247, abnormal_count: 5} smoke_sensor : {device_count: 128, abnormal_count: 14} water_sensor : {device_count: 190, abnormal_count: 4} 翻译成中文
     let res = []
     res.push({
         name: '门磁传感器',
@@ -1025,15 +1041,15 @@ function setOption9(objs) {
 
 
 const handleCustormDetail = (data) => {
-    console.log('点击了行数据:', data.row);
-    getCustormData('CUST-001').then(res => {
+    // console.log('点击了行数据:', data.row);
+    getCustormData(data.row[0]).then(res => {
         userDetail.value = res.data
         showDialog1.value = true
     })
 }
 
 const handleWorkOrderDetail = (data) => {
-    console.log('点击了行数据:', data.row);
+    // console.log('点击了行数据:', data.row);
     getWorkOrderData(data.row[0]).then(res => {
         workOrderDetail.value = res.data
         showDialog2.value = true
